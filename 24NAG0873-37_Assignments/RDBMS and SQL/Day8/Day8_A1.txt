@@ -1,0 +1,69 @@
+ Let's create an Entity-Relationship (ER) diagram for a hospital management system. I'll start by identifying the relevant entities, relationships, attributes, and cardinality. Then, I'll ensure that the diagram reflects proper normalization up to the third normal form (3NF).
+
+### Entities:
+1. *Patient*: Represents an individual who receives medical treatment.
+    - Attributes: PatientID (Primary Key), Name, Date of Birth, Gender, Contact Number, Address
+2. *Doctor*: Represents a medical professional.
+    - Attributes: DoctorID (Primary Key), Name, Specialization, Contact Number
+3. *Department*: Represents different medical departments within the hospital.
+    - Attributes: DepartmentID (Primary Key), Name
+4. *Appointment*: Represents a scheduled appointment between a patient and a doctor.
+    - Attributes: AppointmentID (Primary Key), Date and Time, Status (e.g., confirmed, canceled)
+5. *Prescription*: Represents medication prescribed to a patient.
+    - Attributes: PrescriptionID (Primary Key), Medication, Dosage, Frequency
+
+### Relationships:
+1. *Attends*: A patient attends an appointment.
+    - Cardinality: Many-to-One (Many patients can attend one appointment.)
+2. *WorksIn*: A doctor works in a specific department.
+    - Cardinality: Many-to-One (Many doctors work in one department.)
+3. *Prescribes*: A doctor prescribes medication to a patient.
+    - Cardinality: Many-to-Many (A doctor can prescribe multiple medications, and a patient can receive prescriptions from multiple doctors.)
+
+### ER Diagram:
+mermaid
+erDiagram
+    Patient ||--o{ Appointment : "attends"
+    Doctor ||--o{ Department : "works in"
+    Doctor }|..|{ Prescription : "prescribes"
+    Patient {
+        string PatientID
+        string Name
+        date DateOfBirth
+        string Gender
+        string ContactNumber
+        string Address
+    }
+    Doctor {
+        string DoctorID
+        string Name
+        string Specialization
+        string ContactNumber
+    }
+    Department {
+        string DepartmentID
+        string Name
+    }
+    Appointment {
+        string AppointmentID
+        datetime DateTime
+        string Status
+    }
+    Prescription {
+        string PrescriptionID
+        string Medication
+        string Dosage
+        string Frequency
+    }
+
+
+### Normalization:
+1. *First Normal Form (1NF)*:
+    - All attributes are atomic (no multi-valued attributes).
+    - Each attribute contains only a single value.
+2. *Second Normal Form (2NF)*:
+    - All non-key attributes are fully functionally dependent on the primary key.
+    - No partial dependencies exist.
+3. *Third Normal Form (3NF)*:
+    - All non-key attributes are transitively dependent on the primary key.
+    - No transitive dependencies exist.

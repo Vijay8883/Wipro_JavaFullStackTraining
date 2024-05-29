@@ -1,0 +1,35 @@
+1. *INNER JOIN for Customers in a Specified Region:*
+   To combine the 'orders' and 'customers' tables for customers in a specified region, you can use an INNER JOIN. Assuming you have a 'Region' column in the 'customers' table, here's an example query:
+
+   sql
+   SELECT
+       customers.CustomerID,
+       customers.CustomerName,
+       orders.OrderID,
+       orders.OrderDate
+   FROM
+       customers
+   INNER JOIN
+       orders ON customers.CustomerID = orders.CustomerID
+   WHERE
+       customers.Region = 'YourSpecifiedRegion';
+   
+
+   Replace 'YourSpecifiedRegion' with the actual region you're interested in.
+
+2. *LEFT JOIN to Display All Customers (Including Those Without Orders):*
+   To display all customers, including those without orders, you can use a LEFT JOIN. Here's an example query:
+
+   sql
+   SELECT
+       customers.CustomerID,
+       customers.CustomerName,
+       orders.OrderID,
+       orders.OrderDate
+   FROM
+       customers
+   LEFT JOIN
+       orders ON customers.CustomerID = orders.CustomerID;
+   
+
+   This query will include all customers from the 'customers' table, even if they don't have any orders. If a customer has no orders, the corresponding columns from the 'orders'table will be NULL in the result set 

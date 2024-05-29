@@ -1,0 +1,41 @@
+1. *Subquery to Find Customers Above Average Order Value:*
+   To identify customers who have placed orders above the average order value, we can use a subquery. Assuming you have an 'Orders' table with columns like 'OrderID', 'CustomerID', and 'OrderAmount', here's an example query:
+
+   sql
+   SELECT
+       CustomerID,
+       OrderID,
+       OrderAmount
+   FROM
+       Orders
+   WHERE
+       OrderAmount > (
+           SELECT AVG(OrderAmount)
+           FROM Orders
+       );
+   
+
+   This query retrieves the 'CustomerID', 'OrderID', and 'OrderAmount' for orders where the order amount exceeds the average order amount across all orders¹.
+
+2. *UNION Query with Same Number of Columns:*
+   To combine two SELECT statements with the same number of columns, we can use the UNION operator. Let's say we want to combine results from the 'Customers' and 'Suppliers' tables. Here's an example:
+
+   sql
+   SELECT
+       'Customer' AS Type,
+       ContactName,
+       City,
+       Country
+   FROM
+       Customers
+   UNION
+   SELECT
+       'Supplier',
+       ContactName,
+       City,
+       Country
+   FROM
+       Suppliers;
+   
+
+   This query creates a result set that includes both customers and suppliers, with an additional 'Type' column indicating whether it's a customer or supplier.

@@ -1,0 +1,52 @@
+The ACID properties of a transaction and explore how they relate to database management.
+
+1. *Atomicity*:
+   - Atomicity ensures that a transaction is treated as a single, indivisible unit of work. Either all the changes made by the transaction are committed, or none of them are.
+   - If any part of the transaction fails (e.g., due to an error or system crash), the entire transaction is rolled back to its initial state.
+   - SQL Example:
+     sql
+     BEGIN TRANSACTION;
+     UPDATE Accounts SET Balance = Balance - 100 WHERE AccountID = 123;
+     INSERT INTO TransactionLog (AccountID, Amount) VALUES (123, -100);
+     COMMIT;
+     
+
+2. *Consistency*:
+   - Consistency ensures that a transaction brings the database from one consistent state to another.
+   - The database constraints (e.g., foreign keys, unique constraints) are not violated during the transaction.
+   - SQL Example:
+     sql
+     BEGIN TRANSACTION;
+     UPDATE Orders SET Status = 'Shipped' WHERE OrderID = 456;
+     UPDATE Inventory SET Quantity = Quantity - 1 WHERE ProductID = 789;
+     COMMIT;
+     
+
+3. *Isolation*:
+   - Isolation ensures that concurrent transactions do not interfere with each other.
+   - Different isolation levels (e.g., Read Uncommitted, Read Committed, Repeatable Read, Serializable) control the visibility of changes made by other transactions.
+   - SQL Example (using different isolation levels):
+     sql
+     -- Set isolation level (e.g., Read Committed)
+     SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+
+     -- Transaction 1
+     BEGIN TRANSACTION;
+     SELECT SUM(Quantity) FROM Inventory WHERE ProductID = 789; -- Read
+     -- ...
+
+     -- Transaction 2 (concurrent)
+     BEGIN TRANSACTION;
+     UPDATE Inventory SET Quantity = Quantity - 2 WHERE ProductID = 789; -- Write
+     COMMIT;
+     
+
+4. *Durability*:
+   - Durability ensures that once a transaction is committed, its changes are permanent and survive system failures.
+   - The changes are stored in non-volatile storage (e.g., disk) even if the system crashes.
+   - SQL Example:
+     sql
+     BEGIN TRANSACTION;
+     UPDATE Customers SET Points = Points + 10 WHERE CustomerID = 123;
+     COMMIT; -- Changes are durable
+      

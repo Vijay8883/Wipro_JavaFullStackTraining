@@ -1,0 +1,40 @@
+1. *BEGIN Transaction:*
+   To start a transaction, use the BEGIN statement. This ensures that subsequent SQL statements are part of the same transaction:
+
+   sql
+   BEGIN;
+   
+
+2. *INSERT New Record into 'orders' Table:*
+   Assuming you have an 'orders' table with columns like 'OrderID', 'CustomerID', and 'OrderDate', you can insert a new record like this:
+
+   sql
+   INSERT INTO orders (OrderID, CustomerID, OrderDate)
+   VALUES (12345, 'CustomerXYZ', '2024-05-21');
+   
+
+   Replace the values with actual data.
+
+3. *COMMIT the Transaction:*
+   After successfully inserting the record, commit the transaction to make the changes permanent:
+
+   sql
+   COMMIT;
+   
+
+4. *UPDATE the 'products' Table:*
+   Let's say you want to update the price of a product. Here's an example:
+
+   sql
+   UPDATE products
+   SET Price = 49.99
+   WHERE ProductID = 1001;
+   
+
+   Adjust the column names, values, and conditions as needed.
+
+5. *ROLLBACK the Transaction (if needed):*
+   If something goes wrong and you need to undo the changes, use the ROLLBACK statement:
+
+   sql
+   ROLLBACK;

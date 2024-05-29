@@ -1,0 +1,12 @@
+This schema includes four tables:
+1)Books:Contains details about books.
+Each book has unique BookID and an ISBN.
+
+2)Members:Stores Member information.Each member has a unique MemberID.
+
+3)Loans:Tracks the loans of books to members.Each loan has a unique LoanID.
+
+4)Copies:Keeps track of individual copies of books,their loaction and status.
+
+The FOREIGN KEY constraints establish relationships between the tables,linking BookID and MemberID across them.The CHECK constraints ensure data integrity,such as valid publication years and loan dates.
+ 
